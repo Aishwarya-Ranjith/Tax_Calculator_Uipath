@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Taxcalculator" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="792,3047" sap2010:WorkflowViewState.IdRef="Taxcalculator_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Taxcalculator" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="868,3047" sap2010:WorkflowViewState.IdRef="Taxcalculator_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="30">
       <x:String>System.Activities</x:String>
@@ -59,11 +59,7 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Taxcalculator" sap:VirtualizedContainerService.HintSize="568,2982" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:Int32" Name="intCounter">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="1" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="1" Name="intCounter" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -78,7 +74,7 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="454,2554" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="454,2655" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="sd:DataTable" Name="dataWholesaler" />
                   <Variable x:TypeArguments="sd:DataTable" Name="dataRetailer" />
@@ -143,9 +139,9 @@
                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="412,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Tax value for manufacturer calculated&quot;]" />
                 <ui:ExcelWriteCell Cell="H2:H16" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="[ArraySheetnames(0)]" Text="=F2+G2" />
                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="412,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Final amount for manufacturer calculated&quot;]" />
-                <ui:InterruptibleWhile DisplayName="While" sap:VirtualizedContainerService.HintSize="412,1091" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+                <ui:InterruptibleWhile Condition="[intCounter&lt;3]" DisplayName="While" sap:VirtualizedContainerService.HintSize="412,1192" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
                   <ui:InterruptibleWhile.Body>
-                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,926" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,1027" sap2010:WorkflowViewState.IdRef="Sequence_5">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -165,11 +161,9 @@
                           <InArgument x:TypeArguments="x:Int32">[intCounter+1]</InArgument>
                         </Assign.Value>
                       </Assign>
+                      <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[intCounter.ToString]" />
                     </Sequence>
                   </ui:InterruptibleWhile.Body>
-                  <ui:InterruptibleWhile.Condition>
-                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="intCounter&lt;3" />
-                  </ui:InterruptibleWhile.Condition>
                 </ui:InterruptibleWhile>
               </Sequence>
             </ActivityAction>
